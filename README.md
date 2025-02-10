@@ -1,140 +1,123 @@
-# 🔐 Confidential Single-Price Auction System
+# Confidential Single-Price Auction
 
-## 🌟 Project Overview
+## About
+The Confidential Single-Price Auction package is an implementation of a privacy-preserving auction mechanism using Fully Homomorphic Encryption (FHE) across the auction platform. The TFHE library is deployed on auction contracts to encrypt bid amounts and related data.
 
-This project implements a cutting-edge Confidential Single-Price Auction system leveraging Zama's Fully Homomorphic Encryption Virtual Machine (fhEVM), providing unprecedented privacy and fairness in token auctions.
+It is a single Hardhat project with an integrated CLI (via the hardhat task system) that allows users to deploy and interact with fully encrypted auctions on a local Zama node.
 
-## 🚀 Key Features
+## Encryption Scope
+- Bid amounts: Fully encrypted
+- Token allocations: Encrypted
+- Auction metadata: Partially visible
 
-- **End-to-End Encryption**: Sealed bids with complete confidentiality
-- **Fair Price Discovery**: Lowest price mechanism for token allocation
-- **Flexible Auction Mechanics**: Support for various token types and auction parameters
-- **Privacy-Preserving**: Encrypted bid submissions and settlements
+## Limitations
+- Few modules have been fully converted to FHE
+- Test suite complexity limits full node testing
+- Large test suites may cause runtime memory constraints
+- Some CLI interactions are still under development
 
-## 🛠 Technical Architecture
+## Development Roadmap
+Improve the hardhat-fhevm hardhat plug-in to:
+- Support multiple nodes
+- Enhance CLI for auction creation and management
+- Add more comprehensive encryption features
+- Test on various networks:
+  - Zama's dev node
+  - Anvil
+  - Hardhat node
+- Implement additional auction types
+- Expand encryption coverage
+- Optimize performance and reduce computational overhead
 
-### Components
-- **AuctionFactory.sol**: Dynamic auction creation contract
-- **Auction.sol**: Core auction mechanics and bid management
-- **MockERC20.sol**: Test token implementation
-
-### Privacy Layers
-- Homomorphic encryption of bid amounts
-- Zero-knowledge proof validation
-- Secure multiparty computation
-
-## 📦 Installation & Setup
-
-### Prerequisites
-- Node.js (v20+)
-- Hardhat
-- Zama fhEVM SDK
-
-### Install Dependencies
+## Install & Test
+### Install
 ```bash
 npm install
 ```
 
-### Environment Configuration
-1. Copy `.env.example` to `.env`
-2. Fill in required environment variables
-
-## 🧪 Testing
-
-### Run Tests
+### Test on hardhat network
 ```bash
-# Run on Hardhat network
-npx hardhat test
-
-# Run on local fhEVM node
-npx hardhat test:fhevm
+npm run test
 ```
 
-## 🚀 Deployment
-
-### Deploy to Sepolia Testnet
+### Test on local fhevm node (very slow)
 ```bash
-npx hardhat deploy --network sepolia
+npm run test:fhevm
 ```
 
-## 🎯 Auction Workflow
-
-1. **Auction Creation**: Seller defines auction parameters
-2. **Bid Submission**: Participants submit encrypted bids
-3. **Bid Validation**: Cryptographic verification of bids
-4. **Settlement**: Lowest price determines token allocation
-
-## 🔍 Limitations & Considerations
-
-- **Encryption Scope**: 
-  - Bid amounts fully encrypted
-  - Auction metadata partially visible
-- **Performance**: Homomorphic encryption introduces computational overhead
-
-## 🌐 Supported Networks
-- Sepolia Testnet
-- Zama fhEVM Coprocessor
-- Local Hardhat Network
-
-## 🛡️ Security Considerations
-
-- Comprehensive encryption of sensitive auction data
-- Zero-knowledge proof mechanisms
-- Secure bid submission and settlement
-
-## 🚧 Development Roadmap
-
-1. Enhanced multi-token support
-2. Cross-chain compatibility
-3. Additional privacy features
-4. Performance optimizations
-
-## 📋 CLI Interactions (Planned)
-
+### Local FHEVM Node Management
 ```bash
-# Create new auction
-npx hardhat auction:create --title "Rare Digital Art" --supply 100 --duration 7200
+# starts a new local node (if not already running)
+npm run start
 
-# Submit encrypted bid
-npx hardhat auction:bid --auction-id <ID> --amount <ENCRYPTED_AMOUNT>
+# stops the running local node
+npm run stop
 
-# Finalize auction
-npx hardhat auction:finalize --auction-id <ID>
+# restart a running local node
+npm run restart
 ```
 
-## 🤝 Contributing
+## How to Use the Confidential Auction
+### Setup an Auction (slow)
+The new auction address is displayed at the end of the deployment process.
 
-### Guidelines
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push and create a Pull Request
+```bash
+npx hardhat --network fhevm auction setup --mint 1000 --unpause
+# --mint option to distribute tokens to all participants
+# --unpause option to activate the auction
+# --help to list all available commands
+```
 
-### Bug Reports
-- Use GitHub Issues
-- Provide detailed description
-- Include reproduction steps
+### Inspect the Latest Deployed Auction
+```bash
+npx hardhat --network fhevm auction show
+```
 
-## 📜 License
+### Wallet and Auction Aliases
+Instead of using addresses, you can execute CLI commands using wallet aliases. 
+Auction address is optional. If not provided, the CLI will use the latest valid deployed auction.
 
-[Specify your license here]
+```bash
+# Use auction address
+npx hardhat --network fhevm auction bid \
+  --auction 0x3Aa5ebB10DC797CAC828524e59A333d0A371443c \
+  --user alice \
+  --amount 10n
 
-## 🙏 Acknowledgements
+# Resolve auction address automatically
+npx hardhat --network fhevm auction bid \
+  --user alice \
+  --amount 10n
+```
 
-- **Zama Team**: For the incredible fhEVM technology
-- **Ethereum Community**: Continuous innovation inspiration
-- **Privacy Advocates**: Driving decentralized solutions
+## Test Wallets and Roles
+| Name | Wallet Index | Wallet Aliases | Role | Note |
+|------|--------------|----------------|------|------|
+| 🚀 Admin | 0 | admin | Auction Creator | Owner of AuctionFactory |
+| 👨‍🚀 Seller | 1 | seller | Auction Seller | Creates and manages auctions |
+| 👩 Bidder 1 | 5 | alice | Auction Participant | Can submit encrypted bids |
+| 👱🏼‍♂️ Bidder 2 | 6 | bob | Auction Participant | Can submit encrypted bids |
+| 👱🏼‍♂️ Bidder 3 | 7 | charlie | Auction Participant | Can submit encrypted bids |
 
-## 💬 Contact
+## The 🚧 hardhat-fhevm 🚧 npm package
+Uses the hardhat-fhevm hardhat plugin to develop Solidity contracts on Zama's FHEVM. 
+Supports both mock and local node modes. Currently in alpha testing.
 
-- **Email**: [your-project-email]
-- **Discord**: [Invite Link]
-- **Twitter**: [@YourProjectHandle]
+- NPM: https://www.npmjs.com/package/hardhat-fhevm
+- Git: https://github.com/0xalexbel/hardhat-fhevm
+
+## Detailed Limitations
+- For debugging, events emit encrypted handles
+- Some CLI commands are incomplete
+- Performance overhead due to homomorphic encryption
+- Not all auction modules fully converted to FHE
+
+## License
+[Specify your license]
+
+## Disclaimer
+This is a research prototype. Extensive security review recommended before production use.
 
 ---
 
-**Disclaimer**: This is a research prototype. Extensive security review recommended for production use.
-
-<div align="center">
-  <img src="https://img.shields.io/badge/Built%20with-%E2%9D%A4%EF%B8%8F-red?style=for-the-badge" alt="Built with Love"/>
-</div>
+Built with ❤️ using Zama's FHEVM
