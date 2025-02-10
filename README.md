@@ -39,26 +39,31 @@ pnpm install
 cp .env.example .env
 ```
 
-### Test
+### Available Commands
 ```bash
+# List accounts and balances
+pnpm hardhat accounts
+
+# Check specific account balance
+pnpm hardhat check-balance --account <ADDRESS>
+
+# Get factory information
+pnpm hardhat factory-info
+
 # Run tests
 pnpm test
-```
 
-### Deploy
-```bash
 # Deploy to network
 pnpm hardhat deploy --network sepolia
+
+# Verify contract on Etherscan
+pnpm hardhat verify-deployed
 ```
 
-### Local Node Management
-```bash
-# Start local node
-pnpm start
-
-# Stop local node
-pnpm stop
-```
+### Networks
+- Hardhat (local)
+- Sepolia Testnet
+- Zama Network
 
 ## How to Use the Confidential Auction
 ### Setup an Auction (slow)
@@ -124,3 +129,4 @@ This is a research prototype. Extensive security review recommended before produ
 ---
 
 Built with ❤️ using Zama's FHEVM
+
