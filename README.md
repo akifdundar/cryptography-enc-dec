@@ -29,32 +29,35 @@ Improve the hardhat-fhevm hardhat plug-in to:
 - Expand encryption coverage
 - Optimize performance and reduce computational overhead
 
-## Install & Test
-### Install
+## Quick Start
+### Setup
 ```bash
-npm install
+# Install dependencies
+pnpm install
+
+# Copy environment template
+cp .env.example .env
 ```
 
-### Test on hardhat network
+### Test
 ```bash
-npm run test
+# Run tests
+pnpm test
 ```
 
-### Test on local fhevm node (very slow)
+### Deploy
 ```bash
-npm run test:fhevm
+# Deploy to network
+pnpm hardhat deploy --network sepolia
 ```
 
-### Local FHEVM Node Management
+### Local Node Management
 ```bash
-# starts a new local node (if not already running)
-npm run start
+# Start local node
+pnpm start
 
-# stops the running local node
-npm run stop
-
-# restart a running local node
-npm run restart
+# Stop local node
+pnpm stop
 ```
 
 ## How to Use the Confidential Auction
