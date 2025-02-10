@@ -20,7 +20,7 @@ If an auction does not sell fully, resolution mechanisms include:
 - Executing at the lowest bid price to distribute remaining tokens
 
 ### Key Design Principles
-- Enforced one-bid-per-user policy
+- Enforced one-bid-per-user policy via mapping and bid validation
 - Prohibited bid modifications
 - Configurable auction duration
 - First submitted bid at the lowest price is prioritized
@@ -34,14 +34,21 @@ If an auction does not sell fully, resolution mechanisms include:
 - Limited support for edge cases and exceptional conditions
 - Ongoing optimization required for computational efficiency
 - Potential security vulnerabilities yet to be fully addressed
-- Experimental nature of fully encrypted auction mechanisms
 
 ## 🚀 Future Roadmap
 1. Optimize smart contracts to improve gas efficiency
 2. Refine auction logic to handle edge cases
 3. Integrate multi-token support (ERC721, ERC1155)
-4. Enable cross-chain functionality
-5. Strengthen privacy with advanced cryptographic protocols
+4. Enable cross-chain functionality with Layer-2 solutions and bridges
+5. Strengthen privacy with advanced cryptographic protocols:
+   - zk-SNARKs
+   - Zero-Knowledge Rollups
+   - Improved Homomorphic Encryption
+   - Secure multiparty computation (SMPC)
+
+## Design Visualization
+Check out our detailed design mockup on Figma:
+[ Zama FHE Auction Design](https://www.figma.com/design/UBdZ2moGApVw7dFFZcZ8Vr/ZAMA-FHE?node-id=0-1&t=ONVyuRpVe67EORc4-1)
 
 ## 🚀 Quick Start
 
@@ -110,9 +117,7 @@ npx hardhat --network fhevm auction bid \
 ```
 
 ## 💌 Contact & Support
-- **Email**: [your-email@example.com]
-- **Discord**: [Discord Invite Link]
-- **Twitter**: [@YourProjectHandle]
+- **Twitter**: [@ITUblockchain]
 
 ## Disclaimer
 This is a research prototype. Extensive security review recommended for production use.
