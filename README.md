@@ -12,45 +12,36 @@ The Confidential Single-Price Auction is a pioneering auction system leveraging 
 
 It is a Hardhat-based project that allows users to deploy a fully confidential auction system on Ethereum testnets such as Sepolia. The system ensures complete bid confidentiality while enabling seamless interaction with smart contracts.
 
-### Current State and Limitations
-- Some optimizations are required to enhance efficiency
-- A few modules have yet to be optimized for encrypted computation
-- Running extensive test suites on a live network may be resource-intensive
-- Settlement mechanism ensures fair price discovery by determining the lowest bid required to clear all tokens
-- Full encryption is implemented for bids and auction outcomes
+## 🚀 About
 
-## 🚀 Future Roadmap
-1. Optimize smart contracts to improve gas efficiency and reduce transaction costs
-2. Refine auction logic to handle edge cases more effectively
-3. Integrate multi-token support (ERC721, ERC1155)
-4. Enable cross-chain functionality with Layer-2 solutions and bridges
-5. Strengthen privacy with advanced cryptographic protocols:
-   - zk-SNARKs
-   - Zero-Knowledge Rollups
-   - Improved Homomorphic Encryption
-   - Secure multiparty computation (SMPC)
-
-## 🎯 Addressing Key Challenges
-
-### Challenge: Unsold Tokens or Insufficient Participation
+### Auction Mechanics
 If an auction does not sell fully, resolution mechanisms include:
 - Refunding bidders for unfulfilled allocations
 - Executing at the lowest bid price to distribute remaining tokens
 
-### Challenge: Multiple Bidding Attempts
-- Enforced one-bid-per-user policy via mapping and bid validation
-
-### Challenge: Bid Modification
-- Prohibited bid modifications to ensure fairness
-
-### Challenge: Auction Duration
-- Configurable with a minimum duration of 1 hour
-
-### Challenge: Handling Equal Lowest Bids
+### Key Design Principles
+- Enforced one-bid-per-user policy
+- Prohibited bid modifications
+- Configurable auction duration
 - First submitted bid at the lowest price is prioritized
-
-### Challenge: Preventing Fake Bids
 - Locking mechanism ensures funds are deposited before bid submission
+
+## 🚧 Limitations
+- Current test suite is not fully operational
+- Significant challenges in running comprehensive tests on live networks
+- Performance bottlenecks in homomorphic encryption computations
+- Potential instability in complex auction scenarios
+- Limited support for edge cases and exceptional conditions
+- Ongoing optimization required for computational efficiency
+- Potential security vulnerabilities yet to be fully addressed
+- Experimental nature of fully encrypted auction mechanisms
+
+## 🚀 Future Roadmap
+1. Optimize smart contracts to improve gas efficiency
+2. Refine auction logic to handle edge cases
+3. Integrate multi-token support (ERC721, ERC1155)
+4. Enable cross-chain functionality
+5. Strengthen privacy with advanced cryptographic protocols
 
 ## 🚀 Quick Start
 
