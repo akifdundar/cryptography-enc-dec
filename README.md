@@ -1,35 +1,59 @@
-# Confidential Single-Price Auction
+# 🏰 Confidential Single-Price Auction: Revolutionizing Token Sales with Privacy
 
-## About
-The Confidential Single-Price Auction package is an implementation of a privacy-preserving auction mechanism using Fully Homomorphic Encryption (FHE) across the auction platform. The TFHE library is deployed on auction contracts to encrypt bid amounts and related data.
+<div align="center">
+  <img src="https://img.shields.io/badge/Technology-fhEVM-blueviolet?style=for-the-badge&logo=ethereum" alt="fhEVM Technology"/>
+  <img src="https://img.shields.io/badge/Privacy-Encrypted-green?style=for-the-badge&logo=privacy" alt="Privacy Focused"/>
+  <img src="https://img.shields.io/badge/Zama-Bounty%20Submission-blue?style=for-the-badge" alt="Zama Bounty"/>
+</div>
 
-It is a single Hardhat project with an integrated CLI (via the hardhat task system) that allows users to deploy and interact with fully encrypted auctions on a local Zama node.
+## 🌟 Project Overview
 
-## Encryption Scope
-- Bid amounts: Fully encrypted
-- Token allocations: Encrypted
-- Auction metadata: Partially visible
+The Confidential Single-Price Auction is a pioneering auction system leveraging Zama's Fully Homomorphic Encryption Virtual Machine (fhEVM) to enable private and secure token sales. This ensures that bids (e.g., amount, price) remain encrypted while maintaining fairness and transparency in auction resolution.
 
-## Limitations
-- Few modules have been fully converted to FHE
-- Test suite complexity limits full node testing
-- Large test suites may cause runtime memory constraints
-- Some CLI interactions are still under development
+It is a Hardhat-based project that allows users to deploy a fully confidential auction system on Ethereum testnets such as Sepolia. The system ensures complete bid confidentiality while enabling seamless interaction with smart contracts.
 
-## Development Roadmap
-Improve the hardhat-fhevm hardhat plug-in to:
-- Support multiple nodes
-- Enhance CLI for auction creation and management
-- Add more comprehensive encryption features
-- Test on various networks:
-  - Zama's dev node
-  - Anvil
-  - Hardhat node
-- Implement additional auction types
-- Expand encryption coverage
-- Optimize performance and reduce computational overhead
+### Current State and Limitations
+- Some optimizations are required to enhance efficiency
+- A few modules have yet to be optimized for encrypted computation
+- Running extensive test suites on a live network may be resource-intensive
+- Settlement mechanism ensures fair price discovery by determining the lowest bid required to clear all tokens
+- Full encryption is implemented for bids and auction outcomes
 
-## Quick Start
+## 🚀 Future Roadmap
+1. Optimize smart contracts to improve gas efficiency and reduce transaction costs
+2. Refine auction logic to handle edge cases more effectively
+3. Integrate multi-token support (ERC721, ERC1155)
+4. Enable cross-chain functionality with Layer-2 solutions and bridges
+5. Strengthen privacy with advanced cryptographic protocols:
+   - zk-SNARKs
+   - Zero-Knowledge Rollups
+   - Improved Homomorphic Encryption
+   - Secure multiparty computation (SMPC)
+
+## 🎯 Addressing Key Challenges
+
+### Challenge: Unsold Tokens or Insufficient Participation
+If an auction does not sell fully, resolution mechanisms include:
+- Refunding bidders for unfulfilled allocations
+- Executing at the lowest bid price to distribute remaining tokens
+
+### Challenge: Multiple Bidding Attempts
+- Enforced one-bid-per-user policy via mapping and bid validation
+
+### Challenge: Bid Modification
+- Prohibited bid modifications to ensure fairness
+
+### Challenge: Auction Duration
+- Configurable with a minimum duration of 1 hour
+
+### Challenge: Handling Equal Lowest Bids
+- First submitted bid at the lowest price is prioritized
+
+### Challenge: Preventing Fake Bids
+- Locking mechanism ensures funds are deposited before bid submission
+
+## 🚀 Quick Start
+
 ### Setup
 ```bash
 # Install dependencies
@@ -66,9 +90,8 @@ pnpm hardhat verify-deployed
 - Zama Network
 
 ## How to Use the Confidential Auction
-### Setup an Auction (slow)
-The new auction address is displayed at the end of the deployment process.
 
+### Setup an Auction
 ```bash
 npx hardhat --network fhevm auction setup --mint 1000 --unpause
 # --mint option to distribute tokens to all participants
@@ -76,15 +99,12 @@ npx hardhat --network fhevm auction setup --mint 1000 --unpause
 # --help to list all available commands
 ```
 
-### Inspect the Latest Deployed Auction
+### Inspect Deployed Auction
 ```bash
 npx hardhat --network fhevm auction show
 ```
 
-### Wallet and Auction Aliases
-Instead of using addresses, you can execute CLI commands using wallet aliases. 
-Auction address is optional. If not provided, the CLI will use the latest valid deployed auction.
-
+### Bidding
 ```bash
 # Use auction address
 npx hardhat --network fhevm auction bid \
@@ -98,35 +118,16 @@ npx hardhat --network fhevm auction bid \
   --amount 10n
 ```
 
-## Test Wallets and Roles
-| Name | Wallet Index | Wallet Aliases | Role | Note |
-|------|--------------|----------------|------|------|
-| 🚀 Admin | 0 | admin | Auction Creator | Owner of AuctionFactory |
-| 👨‍🚀 Seller | 1 | seller | Auction Seller | Creates and manages auctions |
-| 👩 Bidder 1 | 5 | alice | Auction Participant | Can submit encrypted bids |
-| 👱🏼‍♂️ Bidder 2 | 6 | bob | Auction Participant | Can submit encrypted bids |
-| 👱🏼‍♂️ Bidder 3 | 7 | charlie | Auction Participant | Can submit encrypted bids |
-
-## The 🚧 hardhat-fhevm 🚧 npm package
-Uses the hardhat-fhevm hardhat plugin to develop Solidity contracts on Zama's FHEVM. 
-Supports both mock and local node modes. Currently in alpha testing.
-
-- NPM: https://www.npmjs.com/package/hardhat-fhevm
-- Git: https://github.com/0xalexbel/hardhat-fhevm
-
-## Detailed Limitations
-- For debugging, events emit encrypted handles
-- Some CLI commands are incomplete
-- Performance overhead due to homomorphic encryption
-- Not all auction modules fully converted to FHE
-
-## License
-[Specify your license]
+## 💌 Contact & Support
+- **Email**: [your-email@example.com]
+- **Discord**: [Discord Invite Link]
+- **Twitter**: [@YourProjectHandle]
 
 ## Disclaimer
-This is a research prototype. Extensive security review recommended before production use.
+This is a research prototype. Extensive security review recommended for production use.
 
 ---
 
-Built with ❤️ using Zama's FHEVM
-
+<div align="center">
+  <img src="https://img.shields.io/badge/Built%20with-%E2%9D%A4%EF%B8%8F-red?style=for-the-badge" alt="Built with Love"/>
+</div>
